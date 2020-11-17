@@ -10,10 +10,62 @@
 X: {{specrun.x_index}}, Degrees: {{specrun.degrees_index}}, Voltage: {{specrun.voltage_index}}, Absorbance: {{specrun.absorbance_index}}</li>
 </ul>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
 <script>
-let xdata = {{x}}
-let ydata = {{y}}
-var coords = xdata.map((v,i) => ({ x: v, y: ydata[i]}))
+//let xdata = {{x}}
+//let ydata = {{y}}
+//var coords = xdata.map((v,i) => ({ x: v, y: ydata[i]}))
+
+const test1 = [{x: -10 ,y: 0},{x: 0 ,y: 10},{x: 10 ,y: 5 }]
+const test2 = [{x: -10 ,y: 5},{x: 0 ,y: 0},{x: 10 ,y: 10 }]
+
+let xdata = [0.34546,1,2,3,4,5,6,7,8,9,10,11,12,13];
+let ydata = [-5,-6.343455009898,-5,-4,-3,-2,-1,0,1,2,3,4,3,2];
+
+      let coords = xdata.map( (v,i) => ({ x: v, y: ydata[i] }) )
+      console.log(coords)
+
+      Chart.defaults.scatter.showLines = true;
+      
+      var graphTest = document.getElementById('graphTest').getContext('2d');
+
+
+
+      var chartTest = new Chart(graphTest, {
+        
+        type: 'scatter' ,
+        data: {
+          labels:['testing1' ],
+          datasets:[{
+            fill: false ,
+            label:'set1'  ,
+            backgroundColor: 
+            "rgb(255, 0, 0)", // red
+            data:  coords  },
+            {
+            fill: false ,  
+            label:'set2' ,
+             backgroundColor: 
+            "rgb(0, 0, 255)" ,// blue
+            data: test2
+
+          }]
+        },
+        options:{
+         
+          scales: {
+              xAxes: [{
+                  type: 'linear',
+                  position: 'bottom'
+              }]
+          }
+        }
+      });
+
+
+
+
 </script>
 
 <a href={% url 'cdspec:edit' specrun.id %}>Edit</a>
